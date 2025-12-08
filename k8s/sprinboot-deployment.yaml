@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: springboot-app
-  labels:
-    app: springboot-app
+  name: petclinic-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
-      app: springboot-app
+      app: petclinic
   template:
     metadata:
       labels:
-        app: springboot-app
+        app: petclinic
     spec:
       containers:
-      - name: springboot-app
-        image: springbootdockerreg.azurecr.io/springbootapp:latest
-        ports:
-        - containerPort: 8080
-      imagePullSecrets:
-      - name: acr-auth
-
+        - name: petclinic
+          image: petclinicacr.azurecr.io/petclinic-app:latest
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "500m"
+            limits:
+              memory: "1Gi"
+              cpu: "1000m"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: springboot-app  
-  labels:
-    app: springboot-app
+  name: petclinic-service
 spec:
   type: LoadBalancer
   ports:
     - port: 80
       targetPort: 8080
   selector:
-    app: springboot-app
+    app: petclinic

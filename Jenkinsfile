@@ -4,19 +4,19 @@ pipeline {
         maven 'maven'
     }
     environment{
-        IMAGE_NAME = 'springbootapp'
+        IMAGE_NAME = 'enahanced-petclinc-springboot'
         IMAGE_TAG = 'latest'
-        TENANT_ID ='ec78375d-0db0-42cf-82a6-2e6403e95936'
-        ACR_NAME = 'springbootdockerreg'
-        ACR_LOGIN_SERVER = 'springbootdockerreg.azurecr.io'
+        TENANT_ID ='1d1dbec3-5cd3-4d06-854f-e719dcd693dd'
+        ACR_NAME = 'petclinicacr07'
+        ACR_LOGIN_SERVER = 'petclinicacr07.azurecr.io'
         FULL_IMAGE_NAME = "${ACR_LOGIN_SERVER}/${IMAGE_NAME}:${IMAGE_TAG}"
-        RG              = "socgen"
-        NAME            = "myAKSCluster"
+        RG              = "bootcamp-rg"
+        NAME            = "petclinic-aks"
     }
     stages {
         stage('Checkout FROM GIT') {
             steps {
-                git branch: 'prod' , url: 'https://github.com/bkrrajmali/enahanced-petclinc-springboot.git'
+                git branch: 'prod' , url: 'https://github.com/sajjaduddin2000/enahanced-petclinc-springboot.git'
         }
       }
         // stage('Validate with Maven ') {
