@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'maven'
+        maven = 'maven'
     }
     environment{
         IMAGE_NAME = 'enahanced-petclinc-springboot'
@@ -117,3 +117,4 @@ pipeline {
         }
     }
 }
+
