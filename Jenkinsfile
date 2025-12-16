@@ -10,8 +10,8 @@ pipeline {
         ACR_NAME = 'petclinicacr07'
         ACR_LOGIN_SERVER = 'petclinicacr07.azurecr.io'
         FULL_IMAGE_NAME = "${ACR_LOGIN_SERVER}/${IMAGE_NAME}:${IMAGE_TAG}"
-        RG              = "bootcamp-rg"
-        NAME            = "petclinic-aks"
+        RG              = "bootcamp-rg1"
+        NAME            = "petclinic07-aks"
     }
     stages {
         stage('Checkout FROM GIT') {

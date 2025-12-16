@@ -1,10 +1,13 @@
-FROM jetty:11-jdk17
+# Use Maven to build the application
+FROM maven:3.8.5-openjdk-17 AS build
+WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Set environment variable (optional, for clarity)
-ENV WAR_FILE petclinic.war
-
-# Copy your WAR file into Jetty’s webapps directory
-COPY target/${WAR_FILE} /var/lib/jetty/webapps/ROOT.war
-
-# Expose Jetty’s default port changing the code 
+# Use a lightweight JRE for running
+FROM openjdk:17-jdk-slim
+WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
+ENTRYPOINT ["java", "-jar", "app.jar"]
