@@ -13,17 +13,17 @@ spec:
         app: petclinic
     spec:
       containers:
-        - name: petclinic
-          image: petclinicacr.azurecr.io/petclinic-app:latest
-          ports:
-            - containerPort: 8080
-          resources:
-            requests:
-              memory: "512Mi"
-              cpu: "500m"
-            limits:
-              memory: "1Gi"
-              cpu: "1000m"
+      - name: petclinic
+        image: petclinicacr07.azurecr.io/enahanced-petclinc-springboot:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
 ---
 apiVersion: v1
 kind: Service
@@ -32,7 +32,7 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-    - port: 80
-      targetPort: 8080
+  - port: 80
+    targetPort: 8080
   selector:
     app: petclinic
